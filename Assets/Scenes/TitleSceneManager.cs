@@ -47,7 +47,7 @@ public class TitleSceneManager : MonoBehaviour
         rectTransform.offsetMax = Vector2.zero;
 
         // ‰¼‚Ì”wŒi
-        Texture2D titleBackgroundTexture = Resources.Load<Texture2D>("defaultTitleBackground");
+        Texture2D titleBackgroundTexture = Resources.Load<Texture2D>("DefaultTitleBackground");
         Sprite sprite = Sprite.Create(titleBackgroundTexture, new Rect(0, 0, titleBackgroundTexture.width, titleBackgroundTexture.height), new Vector2(0.5f, 0.5f));
         titleBackgroundImage.sprite = sprite;
     }
