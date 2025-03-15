@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class HomeSceneManager : MonoBehaviour
     {
         SetHomeBackground();
         SetFooterMenuBar();
+        SetHomeHeaderLabel();
     }
 
     void SetHomeBackground()
@@ -52,13 +54,31 @@ public class HomeSceneManager : MonoBehaviour
         homeBackgroundImage.sprite = sprite;
     }
 
+    // FooterMenuBarの呼び出し
     void SetFooterMenuBar()
     {
-        // FooterMenuBarの呼び出し
-        Canvas canvas = FindObjectOfType<Canvas>();
+
+        Canvas footerMenuBarCanvas = FindObjectOfType<Canvas>();
         GameObject footerMenuBarObject = new GameObject("FooterMenuBar");
-        footerMenuBarObject.transform.SetParent(canvas.transform, false);
+        footerMenuBarObject.transform.SetParent(footerMenuBarCanvas.transform, false);
         FooterMenuBarManager footerMenuBar = footerMenuBarObject.AddComponent<FooterMenuBarManager>();
         footerMenuBar.SetFooterMenuButton();
+    }
+
+    // HeaderAreaLabelの呼び出し
+    void SetHomeHeaderLabel()
+    {
+        // canvas用のゲームオブジェクトを作成
+        GameObject headerAreaLabelCanvasObject = new GameObject("HomeHeaderAreaLabel");
+
+        // 既存のCanvasコンポーネントを取得
+        Canvas headerAreaLabelCanvas = FindObjectOfType<Canvas>();
+
+        // canvasの子要素に設定
+        headerAreaLabelCanvasObject.transform.SetParent(headerAreaLabelCanvas.transform, false);
+
+        // HeaderAreaLabelManager をアタッチ
+        HeaderAreaLabelManager headerAreaLabel = headerAreaLabelCanvasObject.AddComponent<HeaderAreaLabelManager>();
+        headerAreaLabel.SetHeaderAreaLabel("Home", headerAreaLabelCanvas);
     }
 }

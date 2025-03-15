@@ -10,6 +10,7 @@ public class MenuSceneManager : MonoBehaviour
     {
         SetMenuBackground();
         SetFooterMenuBar();
+        SetMenuHeaderLabel();
     }
 
     void SetMenuBackground()
@@ -59,5 +60,22 @@ public class MenuSceneManager : MonoBehaviour
         footerMenuBarObject.transform.SetParent(canvas.transform, false);
         FooterMenuBarManager footerMenuBar = footerMenuBarObject.AddComponent<FooterMenuBarManager>();
         footerMenuBar.SetFooterMenuButton();
+    }
+
+    // HeaderAreaLabelの呼び出し
+    void SetMenuHeaderLabel()
+    {
+        // canvas用のゲームオブジェクトを作成
+        GameObject headerAreaLabelCanvasObject = new GameObject("MenuHeaderAreaLabel");
+
+        // 既存のCanvasコンポーネントを取得
+        Canvas headerAreaLabelCanvas = FindObjectOfType<Canvas>();
+
+        // canvasの子要素に設定
+        headerAreaLabelCanvasObject.transform.SetParent(headerAreaLabelCanvas.transform, false);
+
+        // HeaderAreaLabelManager をアタッチ
+        HeaderAreaLabelManager headerAreaLabel = headerAreaLabelCanvasObject.AddComponent<HeaderAreaLabelManager>();
+        headerAreaLabel.SetHeaderAreaLabel("Menu", headerAreaLabelCanvas);
     }
 }
