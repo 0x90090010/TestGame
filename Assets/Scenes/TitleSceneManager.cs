@@ -91,6 +91,6 @@ public class TitleSceneManager : MonoBehaviour
     {
         // HomeƒV[ƒ“‚É‘JˆÚ‚³‚¹‚é
         Debug.Log("gameStartHitboxClicked");
-        SceneManager.LoadScene("HomeScene");
+        SceneManager.LoadScene("MainScene");
     }
 }
