@@ -13,6 +13,7 @@ public class FooterMenuBarManager : MonoBehaviour
     private MainSceneManager mainSceneManager;
     private HeaderLabelManager headerLabelManager;
     private GameObject footerMenuBarActiveScreenImageObject;
+    private Coroutine moveCoroutine;
 
     //ボタンのサイズ
     int imageWidth = 250;
@@ -49,8 +50,12 @@ public class FooterMenuBarManager : MonoBehaviour
             // ボタンの配置
             RectTransform rectTransform = footerMenuBarBackgroundImageObject.GetComponent<RectTransform>();
             rectTransform.sizeDelta = new Vector2(imageWidth, imageHeight);
+            rectTransform.anchorMin = new Vector2(rectTransform.anchorMin.x, 0);
+            rectTransform.anchorMax = new Vector2(rectTransform.anchorMax.x, 0);
+            rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0);
+            rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, 0);
             Debug.Log(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i);
-            rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i, 0 - Screen.height / 2 * (float)0.8);
+            rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i, rectTransform.rect.height);
             footerMenuBarBackgroundImage = footerMenuBarBackgroundImageObject.GetComponent<Image>();
 
             // 仮の背景
@@ -80,6 +85,10 @@ public class FooterMenuBarManager : MonoBehaviour
         // 配置
         RectTransform rectTransform = footerMenuBarActiveScreenImageObject.GetComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(imageWidth, imageHeight);
+        rectTransform.sizeDelta = new Vector2(imageWidth, imageHeight);
+        rectTransform.anchorMin = new Vector2(rectTransform.anchorMin.x, 0);
+        rectTransform.anchorMax = new Vector2(rectTransform.anchorMax.x, 0);
+        rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0);
 
         // MainSceneManagerの現在の画面情報を取得
         int activeIndex = -1; // デフォルトでHomeボタンの位置
@@ -94,7 +103,7 @@ public class FooterMenuBarManager : MonoBehaviour
                 break;
 
         }
-        rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * activeIndex, 0 - Screen.height / 2 * (float)0.8);
+        rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * activeIndex, rectTransform.rect.height);
         footerMenuBarActiveScreenImage = footerMenuBarActiveScreenImageObject.GetComponent<Image>();
 
         // 仮の背景
@@ -107,7 +116,12 @@ public class FooterMenuBarManager : MonoBehaviour
     {
         Debug.Log(activeIndex);
         RectTransform rectTransform = footerMenuBarActiveScreenImageObject.GetComponent<RectTransform>();
-        rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * activeIndex, 0 - Screen.height / 2 * (float)0.8);
+        rectTransform.sizeDelta = new Vector2(imageWidth, imageHeight);
+        rectTransform.anchorMin = new Vector2(rectTransform.anchorMin.x, 0);
+        rectTransform.anchorMax = new Vector2(rectTransform.anchorMax.x, 0);
+        rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0);
+        rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * activeIndex, rectTransform.rect.height);
+
     }
 
     void SetFooterMenuBarButton()
@@ -128,8 +142,12 @@ public class FooterMenuBarManager : MonoBehaviour
             // ボタンの配置
             RectTransform rectTransform = footerMenuBarButtonImageObject.GetComponent<RectTransform>();
             rectTransform.sizeDelta = new Vector2(imageWidth, imageHeight);
+            rectTransform.sizeDelta = new Vector2(imageWidth, imageHeight);
+            rectTransform.anchorMin = new Vector2(rectTransform.anchorMin.x, 0);
+            rectTransform.anchorMax = new Vector2(rectTransform.anchorMax.x, 0);
+            rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0);
             Debug.Log(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i);
-            rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i, 0 - Screen.height / 2 * (float)0.8);
+            rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i, rectTransform.rect.height);
             footerMenuBarButtonImage = footerMenuBarButtonImageObject.GetComponent<Image>();
 
             // 仮の背景
@@ -160,8 +178,12 @@ public class FooterMenuBarManager : MonoBehaviour
             // ボタンの配置
             RectTransform rectTransform = footerButtonHitbox.GetComponent<RectTransform>();
             rectTransform.sizeDelta = new Vector2(imageWidth, imageHeight);
+            rectTransform.sizeDelta = new Vector2(imageWidth, imageHeight);
+            rectTransform.anchorMin = new Vector2(rectTransform.anchorMin.x, 0);
+            rectTransform.anchorMax = new Vector2(rectTransform.anchorMax.x, 0);
+            rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0);
             Debug.Log(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i);
-            rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i, 0 - Screen.height / 2 * (float)0.8);
+            rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i, rectTransform.rect.height);
 
             // イベントを追加（ボタンやタップを検出）
             switch (i)
