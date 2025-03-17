@@ -60,6 +60,8 @@ public class MainSceneManager : MonoBehaviour
             // HeaderAreaLabelManager をアタッチ
             FooterMenuBarManager footerMenuBar = headerLabelCanvasObject.AddComponent<FooterMenuBarManager>();
             footerMenuBar.SetFooterMenuBarBackground();
+            
+            //Canvasの表示順(数値が大きい方が前面)
             footerMenuBarCanvas.sortingOrder = 10;
         }
     }
@@ -86,6 +88,7 @@ public class MainSceneManager : MonoBehaviour
             // HeaderAreaLabelManager をアタッチ
             HeaderLabelManager headerLabel = headerLabelCanvasObject.AddComponent<HeaderLabelManager>();
             headerLabel.SetHeaderLabel(screenName, headerLabelCanvas);
+            //Canvasの表示順(数値が大きい方が前面)
             headerLabelCanvas.sortingOrder = 10;
         }
     }
@@ -123,6 +126,7 @@ public class MainSceneManager : MonoBehaviour
             // HomeScreenManager をアタッチ
             HomeScreenManager homeScreen = homeScreenCanvasObject.AddComponent<HomeScreenManager>();
             homeScreen.HomeScreen(homeScreenCanvas);
+            //Canvasの表示順(数値が大きい方が前面)
             homeScreenCanvas.sortingOrder = 5;
         }
 
@@ -164,6 +168,7 @@ public class MainSceneManager : MonoBehaviour
             // HomeScreenManager をアタッチ
             MenuScreenManager menuScreen = menuScreenCanvasObject.AddComponent<MenuScreenManager>();
             menuScreen.MenuScreen(menuScreenCanvas);
+            //Canvasの表示順(数値が大きい方が前面)
             menuScreenCanvas.sortingOrder = 5;
         }
 
@@ -182,15 +187,17 @@ public class MainSceneManager : MonoBehaviour
     }
 
     // すべての画面を非表示にする
-    private void DeactivateAllScreens()
+    public void DeactivateAllScreens()
     {
         if (homeScreenCanvasObject != null)
         {
             homeScreenCanvasObject.SetActive(false);
+            Debug.Log("homeScreenCanvasObject is Deactive");
         }
         if (menuScreenCanvasObject != null)
         {
             menuScreenCanvasObject.SetActive(false);
+            Debug.Log("menuScreenCanvasObject is Deactive");
         }
     }
 }

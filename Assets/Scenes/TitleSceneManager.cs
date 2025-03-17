@@ -11,6 +11,7 @@ public class TitleSceneManager : MonoBehaviour
     {
         SetTitleBackground();
         SetGameStartHitbox();
+        Debug.Log($"Window Size: {Screen.width} x {Screen.height}");
     }
 
     void SetTitleBackground()

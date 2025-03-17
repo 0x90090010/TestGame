@@ -12,8 +12,9 @@ public class FooterMenuBarManager : MonoBehaviour
 
     private MainSceneManager mainSceneManager;
     private HeaderLabelManager headerLabelManager;
+    private MenuScreenManager menuScreenManager;
     private GameObject footerMenuBarActiveScreenImageObject;
-    private Coroutine moveCoroutine;
+
 
     //ボタンのサイズ
     int imageWidth = 250;
@@ -30,6 +31,7 @@ public class FooterMenuBarManager : MonoBehaviour
         // シーン内から検索して設定
         mainSceneManager = FindObjectOfType<MainSceneManager>();
         headerLabelManager = FindObjectOfType<HeaderLabelManager>();
+        menuScreenManager = FindObjectOfType<MenuScreenManager>();
     }
 
     public void SetFooterMenuBarBackground()
@@ -55,7 +57,7 @@ public class FooterMenuBarManager : MonoBehaviour
             rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0);
             rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, 0);
             Debug.Log(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i);
-            rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i, rectTransform.rect.height);
+            rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i, rectTransform.rect.height / 4);
             footerMenuBarBackgroundImage = footerMenuBarBackgroundImageObject.GetComponent<Image>();
 
             // 仮の背景
@@ -103,7 +105,7 @@ public class FooterMenuBarManager : MonoBehaviour
                 break;
 
         }
-        rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * activeIndex, rectTransform.rect.height);
+        rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * activeIndex, rectTransform.rect.height / 4);
         footerMenuBarActiveScreenImage = footerMenuBarActiveScreenImageObject.GetComponent<Image>();
 
         // 仮の背景
@@ -120,7 +122,7 @@ public class FooterMenuBarManager : MonoBehaviour
         rectTransform.anchorMin = new Vector2(rectTransform.anchorMin.x, 0);
         rectTransform.anchorMax = new Vector2(rectTransform.anchorMax.x, 0);
         rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0);
-        rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * activeIndex, rectTransform.rect.height);
+        rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * activeIndex, rectTransform.rect.height / 4);
 
     }
 
@@ -147,7 +149,7 @@ public class FooterMenuBarManager : MonoBehaviour
             rectTransform.anchorMax = new Vector2(rectTransform.anchorMax.x, 0);
             rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0);
             Debug.Log(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i);
-            rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i, rectTransform.rect.height);
+            rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i, rectTransform.rect.height / 4);
             footerMenuBarButtonImage = footerMenuBarButtonImageObject.GetComponent<Image>();
 
             // 仮の背景
@@ -183,7 +185,7 @@ public class FooterMenuBarManager : MonoBehaviour
             rectTransform.anchorMax = new Vector2(rectTransform.anchorMax.x, 0);
             rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0);
             Debug.Log(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i);
-            rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i, rectTransform.rect.height);
+            rectTransform.anchoredPosition = new Vector2(0 - imageWidth / 2 * (footerMenuList.Count - 1) + imageWidth * i, rectTransform.rect.height / 4);
 
             // イベントを追加（ボタンやタップを検出）
             switch (i)
@@ -206,19 +208,28 @@ public class FooterMenuBarManager : MonoBehaviour
     void HomeHitboxClicked()
     {
         Debug.Log("HomeHitboxClicked");
+
+        // 事前に呼び出し
+        menuScreenManager = FindObjectOfType<MenuScreenManager>();
+        // Menuのウィンドウを消す
+        menuScreenManager.DeactivateAllMenuWindows();
+
         // MainSceneManager の SetHomeScreen() を呼ぶ
         mainSceneManager.SetHomeScreen();
-
+        
         // ヘッダーのテキストをHomeに変更する
         headerLabelManager.ChangeHeaderText("Home");
 
         // Active Screenの位置を更新
         UpdateActiveScreenPosition(0);
 
+
+
     }
 
     void MenuHitboxClicked()
     {
+
         Debug.Log("MenuHitboxClicked");
         // MainSceneManager の SetMenuScreen() を呼ぶ
         mainSceneManager.SetMenuScreen();
