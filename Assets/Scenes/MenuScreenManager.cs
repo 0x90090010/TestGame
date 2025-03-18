@@ -195,9 +195,60 @@ public class MenuScreenManager : MonoBehaviour
             {
                 Debug.LogError("windowCanvasGameObject is Null");
             }
+            WindowCloseButton();
         }
         // ウィンドウを表示
         windowCanvasGameObject.SetActive(true);
+    }
+
+    void WindowCloseButton()
+    {
+        // ボタン用のGameObjectを作成
+        GameObject windowCloseButtonGameObject = new GameObject("CloseButton");
+        windowCloseButtonGameObject.transform.SetParent(windowCanvasGameObject.transform, false);
+
+        // ButtonコンポーネントとImageコンポーネントを追加
+        Button closeButton = windowCloseButtonGameObject.AddComponent<Button>();
+
+        // imageコンポーネントを追加
+        Image windowCloseButtonImage = windowCloseButtonGameObject.AddComponent<Image>();
+
+        // RectTransform設定
+        RectTransform buttonRect = windowCloseButtonGameObject.GetComponent<RectTransform>();
+        buttonRect.sizeDelta = new Vector2(250, 100); 
+        buttonRect.anchorMin = new Vector2(0.5f, 0.35f); 
+        buttonRect.anchorMax = new Vector2(0.5f, 0.35f);
+        buttonRect.pivot = new Vector2(0.5f, 0.5f);
+        buttonRect.anchoredPosition = new Vector2(0, 5); 
+
+        // ボタンのテキストを追加
+        GameObject buttonTextObject = new GameObject("CloseButtonText");
+        buttonTextObject.transform.SetParent(windowCloseButtonGameObject.transform, false);
+
+        Text buttonText = buttonTextObject.AddComponent<Text>();
+        buttonText.text = "とじる";
+        buttonText.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+        buttonText.fontSize = 30;
+        buttonText.alignment = TextAnchor.MiddleCenter;
+        buttonText.color = Color.black;
+
+        // テキストのRectTransform設定
+        RectTransform textRect = buttonTextObject.GetComponent<RectTransform>();
+        textRect.sizeDelta = buttonRect.sizeDelta;
+        textRect.anchoredPosition = Vector2.zero;
+
+        // 仮の背景
+        Texture2D windowCloseButtonTexture = Resources.Load<Texture2D>("ButtonTexture");
+        Sprite sprite = Sprite.Create(windowCloseButtonTexture, new Rect(0, 0, windowCloseButtonTexture.width, windowCloseButtonTexture.height), new Vector2(0.5f, 0.5f));
+        windowCloseButtonImage.sprite = sprite;
+
+        // ボタンのクリックイベントを設定
+        closeButton.onClick.AddListener(CloseWindow);
+    }
+
+    void CloseWindow()
+    {
+         windowCanvasGameObject.SetActive(false);
     }
 
     // すべての画面を非表示にする
