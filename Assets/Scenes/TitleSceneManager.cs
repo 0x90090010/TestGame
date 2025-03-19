@@ -57,14 +57,9 @@ public class TitleSceneManager : MonoBehaviour
     {
         // canvas用のゲームオブジェクトを作成
         GameObject gameStartHitboxCanvasObject = new GameObject("GameStart");
-        
-        // Canvasコンポーネントを追加
-        Canvas gameStartHitboxCanvas = gameStartHitboxCanvasObject.AddComponent<Canvas>();
-        
-        // レンダーモードをScreenSpaceCameraに設定
-        gameStartHitboxCanvas.renderMode = RenderMode.ScreenSpaceCamera;
+        GameObject parentCanvas = GameObject.Find("TitleBackground");
         gameStartHitboxCanvasObject.AddComponent<GraphicRaycaster>();
-        
+
         // image用のゲームオブジェクトを作成
         GameObject gameStartHitboxImageObject = new GameObject("GameStartImage");
         
@@ -72,20 +67,13 @@ public class TitleSceneManager : MonoBehaviour
         Image gameStartHitboxImage = gameStartHitboxImageObject.AddComponent<Image>();
         
         // 透明にする
-        gameStartHitboxImage.color = new Color(1, 1, 1, 0.1f); 
+        gameStartHitboxImage.color = new Color(1, 1, 1, 0f); 
         
         // canvasの子要素に設定
-        gameStartHitboxImageObject.transform.SetParent(gameStartHitboxCanvas.transform, false);
-        
-        // RectTransformの設定(ウィンドウ全体に表示する)
-        RectTransform rectTransform = gameStartHitboxImageObject.GetComponent<RectTransform>();
-        rectTransform.anchorMin = Vector2.zero;
-        rectTransform.anchorMax = Vector2.one;
-        rectTransform.offsetMin = Vector2.zero;
-        rectTransform.offsetMax = Vector2.zero;
+        gameStartHitboxImageObject.transform.SetParent(parentCanvas.transform, false);
 
         // ボタン使用時の動作(呼び出す関数)
-        gameStartHitboxCanvasObject.AddComponent<Button>().onClick.AddListener(() => GameStartHitboxClicked());
+        parentCanvas.AddComponent<Button>().onClick.AddListener(() => GameStartHitboxClicked());
     }
 
     void GameStartHitboxClicked()
