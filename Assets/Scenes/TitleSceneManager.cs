@@ -11,6 +11,11 @@ public class TitleSceneManager : MonoBehaviour
     {
         SetTitleBackground();
         SetGameStartHitbox();
+        CanvasResizeManager canvasResizeManager = gameObject.AddComponent<CanvasResizeManager>();
+        if(canvasResizeManager != null)
+        {
+            canvasResizeManager.ResizeCanvas();
+        }
         Debug.Log($"Window Size: {Screen.width} x {Screen.height}");
     }
 
